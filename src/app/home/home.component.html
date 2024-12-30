@@ -1,0 +1,84 @@
+<div>
+  <app-navbar></app-navbar>
+</div>
+<div class="flex justify-center">
+  <div
+    class="grid grid-cols-3 gap-x-8 gap-y-16 m-16 pt-16 w-4/5 justify-items-center"
+  >
+    <div class="text-4xl col-span-3 justify-self-start">Your Progress</div>
+    <div>
+      <app-progresscard></app-progresscard>
+    </div>
+    <div>
+      <app-devoirduecard></app-devoirduecard>
+    </div>
+    <div>
+      <app-upcomingexams></app-upcomingexams>
+    </div>
+
+    <div class="col-span-3 justify-self-start text-4xl">
+      Top Recommendations For You
+    </div>
+    <div>
+      <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+        <ng-template #header>
+          <p-image
+          class="w-full"
+            src="spring.png"
+            loading="lazy"
+            alt="Image"
+            [preview]="true"
+          />
+        </ng-template>
+        <ng-template #subtitle> Card subtitle </ng-template>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore
+          sed consequuntur error repudiandae numquam deserunt quisquam repellat
+          libero asperiores earum nam nobis, culpa ratione quam perferendis
+          esse, cupiditate neque quas!
+        </p>
+      </p-card>
+    </div>
+    <div>
+        <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+          <ng-template #header>
+            <p-image
+            class="w-full"
+              src="spring.png"
+              loading="lazy"
+              alt="Image"
+              [preview]="true"
+            />
+          </ng-template>
+          <ng-template #subtitle> Card subtitle </ng-template>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore
+            sed consequuntur error repudiandae numquam deserunt quisquam repellat
+            libero asperiores earum nam nobis, culpa ratione quam perferendis
+            esse, cupiditate neque quas!
+          </p>
+        </p-card>
+      </div>
+      <div>
+        <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+          <ng-template #header>
+            <p-image
+            class="w-full"
+              src="spring.png"
+              loading="lazy"
+              alt="Image"
+              [preview]="true"
+            />
+          </ng-template>
+          <ng-template #subtitle> Card subtitle </ng-template>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore
+            sed consequuntur error repudiandae numquam deserunt quisquam repellat
+            libero asperiores earum nam nobis, culpa ratione quam perferendis
+            esse, cupiditate neque quas!
+          </p>
+        </p-card>
+      </div>
+    
+  </div>
+</div>

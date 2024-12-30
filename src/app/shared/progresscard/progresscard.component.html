@@ -1,0 +1,25 @@
+<div class="w-max">
+  <p-card [style]="{ overflow: 'hidden', width: '30rem'}">
+    
+    <ng-template #title> Avancement des cours </ng-template>
+    <div class="grid grid-cols-1 gap-4">
+      <div>
+        <p>Introduction Java : JEE</p>
+        <ng-template #title> Advanced Card </ng-template>
+        <p-progressbar [value]="90" />
+      </div>
+      <div>
+        <p>Java</p>
+        <p-progressbar [value]="40" />
+      </div>
+      <div>
+        <p>C#</p>
+        <p-progressbar [value]="20" />
+      </div>
+      <div>
+        <p>C++</p>
+        <p-progressbar [value]="100" />
+      </div>
+    </div>
+  </p-card>
+</div>
