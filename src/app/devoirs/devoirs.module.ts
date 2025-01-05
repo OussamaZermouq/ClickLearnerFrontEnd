@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CoursesRoutingModule } from './courses-routing.module';
-import { CoursesComponent } from './courses.component';
+import { DevoirsRoutingModule } from './devoirs-routing.module';
+import { DevoirsComponent } from './devoirs.component';
 import { SharedModule } from '../shared/shared.module';
 
 
@@ -11,8 +11,10 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
-    CoursesComponent,
-    CoursesRoutingModule
+    DevoirsRoutingModule,
+    DevoirsComponent
+
+    
   ]
 })
-export class CoursesModule { }
+export class DevoirsModule { }

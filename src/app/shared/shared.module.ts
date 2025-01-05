@@ -15,6 +15,27 @@ import { DatePicker } from 'primeng/datepicker';
 import { ToastModule } from 'primeng/toast';
 import { DevoirduecardComponent } from './devoirduecard/devoirduecard.component';
 import { UpcomingexamsComponent } from './upcomingexams/upcomingexams.component';
+import { DevoirComponent } from './devoir/devoir.component';
+import { DataView, DataViewModule } from 'primeng/dataview';
+import { TagModule } from 'primeng/tag';
+import { SelectModule } from 'primeng/select';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { CourseoverviewComponent } from './courseoverview/courseoverview.component';
+import { Image } from 'primeng/image';
+import { AccordionModule } from 'primeng/accordion';
+import { CreatecourseformComponent } from './createcourseform/createcourseform.component';
+import { StepsModule } from 'primeng/steps';
+import { TextareaModule } from 'primeng/textarea';
+
+import { EditorModule } from 'primeng/editor';
+import { FileUploadModule } from 'primeng/fileupload';
+import { UploadresourcestocoursComponent } from './uploadresourcestocours/uploadresourcestocours.component';
+
+import { FileUpload } from 'primeng/fileupload';
+import { BadgeModule } from 'primeng/badge';
+import { ProgressBar } from 'primeng/progressbar';
 
 @NgModule({
   declarations: [
@@ -23,6 +44,10 @@ import { UpcomingexamsComponent } from './upcomingexams/upcomingexams.component'
     ProgresscardComponent,
     DevoirduecardComponent,
     UpcomingexamsComponent,
+    DevoirComponent,
+    CourseoverviewComponent,
+    CreatecourseformComponent,
+    UploadresourcestocoursComponent,
   ],
   imports: [
     CommonModule,
@@ -31,10 +56,28 @@ import { UpcomingexamsComponent } from './upcomingexams/upcomingexams.component'
     FormsModule,
     MegaMenuModule,
     AvatarModule,
-    ButtonModule,
     ProgressBarModule,
     ToastModule,
     DatePicker,
+    TagModule,
+    DataView,
+    AccordionModule,
+    InputTextModule,
+    SelectModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    ButtonModule,
+    StepsModule,
+    Image,
+    FileUploadModule,
+    TextareaModule,
+    EditorModule,
+    FileUpload,
+    ButtonModule,
+    BadgeModule,
+    ProgressBar,
+    ToastModule,
+    CommonModule,
   ],
   exports: [
     NavbarComponent,
@@ -43,6 +86,10 @@ import { UpcomingexamsComponent } from './upcomingexams/upcomingexams.component'
     CardModule,
     DevoirduecardComponent,
     UpcomingexamsComponent,
+    DevoirComponent,
+    CourseoverviewComponent,
+    CreatecourseformComponent,
+    UploadresourcestocoursComponent,
   ], // Export here
 })
 export class SharedModule {}

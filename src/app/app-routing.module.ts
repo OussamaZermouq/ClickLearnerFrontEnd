@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { provideRouter, RouterModule, Routes } from '@angular/router';
+import { MessageService } from 'primeng/api';
 
 const routes: Routes = [
   {
@@ -7,10 +8,14 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   { path: 'courses', loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule) },
+  { path: 'devoirs', loadChildren: () => import('./devoirs/devoirs.module').then(m => m.DevoirsModule) },
+  { path: 'courses/coursedetails/:id', loadChildren: () => import('./courses/coursedetails/coursedetails.module').then(m => m.CoursedetailsModule) },
+  { path: 'courses/createcourse', loadChildren: () => import('./courses/createcourse/createcourse.module').then(m => m.CreatecourseModule) },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
+  providers: [provideRouter(routes), MessageService],
 })
 export class AppRoutingModule {}

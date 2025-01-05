@@ -1,1 +1,53 @@
-<p>courses works!</p>
+<div>
+  <app-navbar></app-navbar>
+</div>
+<div class="flex justify-center">
+  <div
+    class="grid grid-cols-1 gap-x-8 gap-y-16 m-16 pt-16 w-4/5 justify-items-start"
+  >
+    <div class="justify-self-start">
+      <p class="text-4xl">Decouvrez nos cours</p>
+    </div>
+    <div class="grid grid-cols-4 gap-5 w-full">
+      <div class="w-full h-full">
+        <p-card header="Simple Card">
+          <p class="m-0">Lorem ipsum dolor sit amet...</p>
+        </p-card>
+      </div>
+      <div class="col-span-3">
+        <div class="grid grid-cols-3 gap-4">
+          <div *ngFor="let c of courses">
+            <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+              <ng-template #header>
+                <img
+                  alt="Card"
+                  class="w-full"
+                  src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+                />
+              </ng-template>
+              <ng-template #title> {{ c.titreCours }} </ng-template>
+              <div class="text-md px-2 mt-2">
+                <p>
+                  {{
+                    c.descriptionCours
+                      ? c.descriptionCours.substring(0, 200) + "..."
+                      : "No description available"
+                  }}
+                </p>
+              </div>
+              <ng-template #footer>
+                <div class="flex gap-4 mt-1">
+                  <p-button
+                    label="Savoir plus"
+                    class="w-full"
+                    styleClass="w-full"
+                  />
+                </div>
+              </ng-template>
+            </p-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

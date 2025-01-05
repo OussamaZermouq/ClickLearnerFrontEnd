@@ -1,0 +1,36 @@
+<div>
+  <app-navbar></app-navbar>
+</div>
+<div class="flex justify-center">
+  <div
+    class="grid grid-cols-1 gap-x-8 gap-y-16 m-16 pt-16 w-4/5 justify-items-center "
+  >
+    <div class="justify-self-start">
+      <p class="text-4xl">Vos devoirs</p>
+    </div>
+
+    <div class="w-96 justify-self-start flex flex-col gap-5 pl-10">
+      <p-inputgroup class="w-28">
+        <p-button label="Search" />
+        <input
+          
+          pInputText
+          [(ngModel)]="searchText"
+          placeholder="Keywords..."
+          class="pl-5 rounded-r-lg border-2 border-gray-300"
+          pSize="large"
+        />
+      </p-inputgroup>
+
+      <div class="flex gap-5">
+        <p-button> All </p-button>
+        <p-button> Pending </p-button>
+        <p-button> Completed </p-button>
+      </div>
+    </div>
+
+    <div>
+      <app-devoir></app-devoir>
+    </div>
+  </div>
+</div>

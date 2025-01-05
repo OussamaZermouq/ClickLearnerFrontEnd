@@ -1,0 +1,136 @@
+<div class="card w-full">
+  <pre>
+    {{ coursToCreate | json }}
+
+  </pre>
+
+  <div class="flex mb-8 gap-2 justify-end">
+    <p-button
+      (click)="active = 0"
+      [rounded]="true"
+      label="1"
+      styleClass="w-8 h-8 p-0"
+      [outlined]="active !== 0"
+    />
+    <p-button
+      (click)="active = 1"
+      [rounded]="true"
+      label="2"
+      styleClass="w-8 h-8 p-0"
+      [outlined]="active !== 1"
+    />
+    <p-button
+      (click)="active = 2"
+      [rounded]="true"
+      label="3"
+      styleClass="w-8 h-8 p-0"
+      [outlined]="active !== 2"
+    />
+  </div>
+  <p-steps [activeIndex]="active" [model]="items" />
+  <div *ngIf="active == 0">
+    <p-card>
+      <div class="px-32 flex flex-col">
+        <p class="text-2xl font-bold">Informations basique</p>
+        <div class="grid grid-cols-2 gap-8 mt-5">
+          <div class="flex flex-col gap-8">
+            <p-inputgroup>
+              <input
+                pInputText
+                [(ngModel)]="coursToCreate.titreCours"
+                placeholder="Nom du cours"
+              />
+            </p-inputgroup>
+
+            <textarea
+              rows="5"
+              cols="30"
+              pTextarea
+              placeholder="Une petite description de votre cours"
+              [(ngModel)]="coursToCreate.descriptionCours"
+            ></textarea>
+
+            <div class="flex flex-row gap-4">
+              <p-inputgroup>
+                <input
+                  pInputText
+                  [(ngModel)]="coursToCreate.estimatedDuration"
+                  placeholder="Estimation de la duree (minutes)"
+                />
+              </p-inputgroup>
+              <p-select
+                [options]="difficulties"
+                [(ngModel)]="selectedDifficulty"
+                optionLabel="name"
+                placeholder="Select a difficulty"
+              />
+
+              <p-select
+                [options]="matiereList"
+                [(ngModel)]="selectedMatiere"
+                optionLabel="name"
+                placeholder="Votre matiere"
+              />
+            </div>
+          </div>
+          <div class="card flex flex-col gap-6 items-center">
+            <p>Ajouter une photo pour ce cours</p>
+            <p-fileupload
+              mode="basic"
+              name="demo[]"
+              chooseIcon="pi pi-upload"
+              url="https://www.primefaces.org/cdn/api/upload.php"
+              accept="image/*"
+              maxFileSize="1000000"
+              [auto]="true"
+              chooseLabel="Browse"
+            />
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
+
+  <div *ngIf="active == 1">
+    <p-card>
+      <div class="flex flex-col gap-4">
+        <div
+          *ngFor="let chapter of chapters; let i = index"
+          class="flex flex-col gap-4"
+        >
+          <div class="flex flex-row gap-4">
+            <div class="basis-4/5">
+              <p-editor
+                [(ngModel)]="chapter.content"
+                [style]="{ height: '320px', width: '100%' }"
+              ></p-editor>
+            </div>
+
+            <div class="basis-1/5 flex flex-col gap-4">
+                <app-uploadresourcestocours></app-uploadresourcestocours>
+                <div class="chapter-actions grow self-center">
+                  <p-button
+                    icon="pi pi-check"
+                    iconPos="right"
+                    class="save-button"
+                    (onClick)="saveChapter(i)"
+                    label="Save Chapter {{ i + 1 }}"
+                  />
+                </div>
+            </div>
+          </div>
+
+          
+        </div>
+
+        <p-button class="self-center" (onClick)="addChapter()">
+          Ajouter un chapitre
+        </p-button>
+      </div>
+    </p-card>
+  </div>
+
+  <div *ngIf="active == 2">
+    <p-card> </p-card>
+  </div>
+</div>
