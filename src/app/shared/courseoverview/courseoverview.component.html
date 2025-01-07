@@ -2,42 +2,44 @@
   <div class="grid grid-cols-8">
     <div class="col-span-4 col-start-2">
       <div class="flex flex-col gap-4">
-        <p class="text-3xl font-bold">{{ cours.titreCours }}</p>
+        <p-toast />
+        <p class="text-5xl font-bold">{{ cours!.titreCours }}</p>
         <p>
-          {{ cours.descriptionCours }}
+          {{ cours!.descriptionCours }}
         </p>
         <div class="flex gap-4">
           <div class="flex gap-2 items-center">
             <i class="pi pi-clock self-center"></i>
-            <p class="text-lg">6 hours</p>
+            <p class="text-lg">{{cours!.estimatedDuration}} minutes</p>
           </div>
 
           <div class="flex gap-2 items-center">
             <i class="pi pi-book self-center"></i>
-            <p class="text-lg">intermediate</p>
+            <p class="text-lg normal-case">{{cours!.difficulty}}</p>
           </div>
 
           <div class="flex gap-2 items-center">
             <i class="pi pi-user self-center"></i>
-            <p class="text-lg">50 subscribers</p>
+            <p class="text-lg">0 subscriber(s)</p>
           </div>
         </div>
-        <p-button> S'inscrire au cours </p-button>
+        <p-button (click)="subscribeToCours(9)"> S'inscrire au cours </p-button>
         <p-image
           class="w-full justify-self-center"
-          src="spring.png"
+          [src]="cours!.coursImage"
           loading="lazy"
+          width="500"
           alt="Image"
           [preview]="true"
         />
         <p class="text-2xl font-bold">Contenu du cours</p>
         <p-card>
-          <p-accordion *ngFor="let chap of cours.chapitres" value="0">
+          <p-accordion *ngFor="let chap of cours!.chapitres!" value="0">
             <p-accordion-panel value="0">
-              <p-accordion-header>{{ chap.titreChapitre }}</p-accordion-header>
+              <p-accordion-header>{{ chap!.titreChapitre }}</p-accordion-header>
               <p-accordion-content>
                 <p class="m-0">
-                  {{ chap.chapitreDescription }}
+                  {{ chap!.chapitreDescription }}
                 </p>
               </p-accordion-content>
             </p-accordion-panel>
@@ -47,12 +49,12 @@
         <p-card>
           <div class="flex flex-col gap-4">
             <div
-              *ngFor="let c of cours.chapitres"
+              *ngFor="let c of cours!.chapitres"
               class="flex gap-2 items-center"
             >
               <i class="pi pi-file self-center"></i>
               <div class="flex flex-col" *ngFor="let doc of c.documents">
-                <p class="text-md">{{ doc.nomDocument }}</p>
+                <p class="text-md">{{ doc!.nomDocument }}</p>
               </div>
             </div>
           </div>
@@ -63,9 +65,9 @@
       <div class="sticky top-32">
         <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
           <ng-template #title>
-            <p class="capitalize">{{ prof.firstName }} {{ prof.lastName }}</p>
+            <p class="capitalize">{{ prof!.firstName }} {{ prof!.lastName }}</p>
           </ng-template>
-          <ng-template #subtitle> {{ prof.username }} </ng-template>
+          <ng-template #subtitle> {{ prof!.username }} </ng-template>
         </p-card>
       </div>
     </div>

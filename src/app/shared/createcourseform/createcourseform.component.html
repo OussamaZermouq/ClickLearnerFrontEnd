@@ -1,33 +1,6 @@
 <div class="card w-full">
-  <pre>
-    {{ coursToCreate | json }}
 
-  </pre>
-
-  <div class="flex mb-8 gap-2 justify-end">
-    <p-button
-      (click)="active = 0"
-      [rounded]="true"
-      label="1"
-      styleClass="w-8 h-8 p-0"
-      [outlined]="active !== 0"
-    />
-    <p-button
-      (click)="active = 1"
-      [rounded]="true"
-      label="2"
-      styleClass="w-8 h-8 p-0"
-      [outlined]="active !== 1"
-    />
-    <p-button
-      (click)="active = 2"
-      [rounded]="true"
-      label="3"
-      styleClass="w-8 h-8 p-0"
-      [outlined]="active !== 2"
-    />
-  </div>
-  <p-steps [activeIndex]="active" [model]="items" />
+  <p-steps [activeIndex]="active" [model]="items"  (activeIndexChange)="onActiveIndexChange($event)" [readonly]="false"/>
   <div *ngIf="active == 0">
     <p-card>
       <div class="px-32 flex flex-col">
@@ -59,15 +32,17 @@
                 />
               </p-inputgroup>
               <p-select
-                [options]="difficulties"
-                [(ngModel)]="selectedDifficulty"
-                optionLabel="name"
-                placeholder="Select a difficulty"
-              />
+              [options]="difficulties"
+              [(ngModel)]="coursToCreate.difficulty"
+              [ngModelOptions]="{ standalone: true }"
+              placeholder="Select a difficulty"
+              (ngModelChange)="coursToCreate.difficulty = coursToCreate.difficulty?.toUpperCase()"
+            >
+            </p-select>
 
               <p-select
                 [options]="matiereList"
-                [(ngModel)]="selectedMatiere"
+                [(ngModel)]="coursToCreate.matiere"
                 optionLabel="name"
                 placeholder="Votre matiere"
               />
@@ -75,15 +50,23 @@
           </div>
           <div class="card flex flex-col gap-6 items-center">
             <p>Ajouter une photo pour ce cours</p>
+            <div *ngIf="coursImageUploadedUrl">
+              <p-image
+                [ngModel]="coursToCreate.coursImage"
+                [src]="coursImageUploadedUrl"
+                alt="Image"
+                width="250"
+              />
+            </div>
             <p-fileupload
               mode="basic"
               name="demo[]"
               chooseIcon="pi pi-upload"
-              url="https://www.primefaces.org/cdn/api/upload.php"
               accept="image/*"
               maxFileSize="1000000"
               [auto]="true"
               chooseLabel="Browse"
+              (onSelect)="onSelectedFiles($event)"
             />
           </div>
         </div>
@@ -93,34 +76,79 @@
 
   <div *ngIf="active == 1">
     <p-card>
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col">
         <div
-          *ngFor="let chapter of chapters; let i = index"
-          class="flex flex-col gap-4"
+          *ngFor="let chapter of coursToCreate.chapitres; let i = index"
+          class="flex flex-col"
         >
           <div class="flex flex-row gap-4">
             <div class="basis-4/5">
+              <div class="grid grid-cols-3 gap-8 p-4">
+                <p-inputgroup>
+                  <input
+                    pInputText
+                    [(ngModel)]="chapter.titreChapitre"
+                    placeholder="Titre du chapitre"
+                  />
+                </p-inputgroup>
+
+                <p-inputnumber
+                  inputId="integeronly"
+                  [(ngModel)]="chapter.numChapitre"
+                  placeholder="Numero du chapitre"
+                />
+
+                <p-inputgroup class="col-span-2">
+                  <input
+                    pInputText
+                    [(ngModel)]="chapter.chapitreDescription"
+                    placeholder="Description du chapitre"
+                  />
+                </p-inputgroup>
+              </div>
               <p-editor
-                [(ngModel)]="chapter.content"
+                [(ngModel)]="chapter.chapitreContent"
                 [style]="{ height: '320px', width: '100%' }"
               ></p-editor>
             </div>
 
             <div class="basis-1/5 flex flex-col gap-4">
-                <app-uploadresourcestocours></app-uploadresourcestocours>
-                <div class="chapter-actions grow self-center">
-                  <p-button
-                    icon="pi pi-check"
-                    iconPos="right"
-                    class="save-button"
-                    (onClick)="saveChapter(i)"
-                    label="Save Chapter {{ i + 1 }}"
-                  />
-                </div>
+              <!-- DOCUMENT UPLOAD -->
+              <div class="card w-min">
+                <p-toast />
+                <p-fileupload
+                  name="demo[]"
+                  (onUpload)="onUpload($event, i)"
+                  url="https://www.primefaces.org/cdn/api/upload.php"
+                  [multiple]="true"
+                  maxFileSize="1000000000000000"
+                  mode="advanced"
+                >
+                  <ng-template #empty>
+                    <div>
+                      Veuillez televerser les documents (videos ou fichier) ici.
+                    </div>
+                  </ng-template>
+                  <ng-template #content>
+                    <ul *ngIf="uploadedFiles.length">
+                      <li *ngFor="let file of uploadedFiles">
+                        {{ file.name }} - {{ file.size }} bytes
+                      </li>
+                    </ul>
+                  </ng-template>
+                </p-fileupload>
+              </div>
+              <div class="chapter-actions grow self-center">
+                <p-button
+                  icon="pi pi-check"
+                  iconPos="right"
+                  class="save-button"
+                  (onClick)="saveChapter(i)"
+                  label="Save Chapter {{ i + 1 }}"
+                />
+              </div>
             </div>
           </div>
-
-          
         </div>
 
         <p-button class="self-center" (onClick)="addChapter()">
@@ -131,6 +159,72 @@
   </div>
 
   <div *ngIf="active == 2">
-    <p-card> </p-card>
+    <p-card class="course-card">
+      <!-- Course Header Section -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-32">
+        <!-- Course Title and Description -->
+        <div class="space-y-4">
+          <h1 class="text-2xl font-bold">
+            {{coursToCreate.titreCours}}
+          </h1>
+          <p class="text-sm font-medium text-gray-700">
+            {{coursToCreate.descriptionCours}}
+          </p>
+          
+          <!-- Course Metadata -->
+          <div class="flex gap-6 mt-4">
+            <div class="flex items-center gap-2">
+              <i class="pi pi-clock text-blue-600"></i>
+              <span class="text-lg">{{coursToCreate.estimatedDuration}}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="pi pi-book text-blue-600"></i>
+              <span class="text-lg">{{coursToCreate.difficulty}}</span>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Course Image -->
+        <div class="flex justify-center md:justify-end" *ngIf="coursImageUploadedUrl">
+          <p-image
+            [ngModel]="coursToCreate.coursImage"
+            [src]="coursImageUploadedUrl"
+            alt="Course cover image"
+            width="250"
+            class="rounded-lg shadow-md"
+          />
+        </div>
+      </div>
+    
+      <!-- Chapters Section -->
+      <div class="mt-8">
+        <p-button (click)="onsaveCourse()">Save this course</p-button>
+        <h2 class="text-xl font-semibold mb-4">Course Chapters</h2>
+        <div class="space-y-6">
+          <div
+            *ngFor="let chapter of coursToCreate.chapitres; let i = index"
+            class="chapter-containerrounded-lg p-6"
+          >
+            <!-- Chapter Header -->
+            <div class="mb-4">
+              <h3 class="text-lg font-medium">
+                <span class="text-blue-600">Chapter {{chapter.numChapitre}}</span> | 
+                {{chapter.titreChapitre}}
+              </h3>
+              <p class="text-gray-600 mt-2">
+                {{chapter.chapitreDescription}}
+              </p>
+            </div>
+    
+            <!-- Chapter Content -->
+            <div class="prose max-w-none">
+              <div [innerHTML]="chapter.chapitreContent"
+              class="text-wrap break-words whitespace-normal overflow-x-hidden max-w-full">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-card>
   </div>
 </div>

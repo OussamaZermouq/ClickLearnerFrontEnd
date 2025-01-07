@@ -7,7 +7,7 @@ export class Chapitre{
     titreChapitre?:string;
     chapitreDescription?:string;
     numChapitre?:number;
+    chapitreContent?:string;
     cours?:Cours;
     documents?:Document[];
-    videos?:Video[];
 }

@@ -10,11 +10,9 @@ import { Cours } from "../../../models/Cours";
 
 export class CoursService{
     readonly baseUrl = `${environment.baseUrlCours}/api/v1/cours`
-
     constructor(private http:HttpClient){
-
     }
-
+    
     getAllCours(){
         return this.http.get(`${this.baseUrl}/`);
     }
@@ -23,4 +21,8 @@ export class CoursService{
         return this.http.get(`${this.baseUrl}/${coursId}`);
     }
 
+    createCours(cours:Cours){
+
+        return this.http.post(`${this.baseUrl}/create`,cours);
+    }
 }

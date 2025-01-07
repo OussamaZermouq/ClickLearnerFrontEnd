@@ -1,9 +1,13 @@
-import { Chapitre } from "./Chapitre";
+import { Chapitre } from './Chapitre';
 
-
-export class Document{
-    documentId?:number;
-    nomDocument?:string;
-    urlDocument?:string;
-    chapitre?:Chapitre;
+export class Document {
+  nomDocument?: string;
+  urlDocument?: string;
+  constructor(
+    nomDocument?: string,
+    urlDocument?: string,
+  ) {
+    this.nomDocument = nomDocument;
+    this.urlDocument = urlDocument;
+  }
 }

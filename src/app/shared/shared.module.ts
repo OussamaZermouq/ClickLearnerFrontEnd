@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -36,7 +36,11 @@ import { UploadresourcestocoursComponent } from './uploadresourcestocours/upload
 import { FileUpload } from 'primeng/fileupload';
 import { BadgeModule } from 'primeng/badge';
 import { ProgressBar } from 'primeng/progressbar';
+import { InputNumberModule } from 'primeng/inputnumber';
 
+
+import {CloudinaryModule} from '@cloudinary/ng';
+import { LoginformComponent } from './loginform/loginform.component';
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -48,6 +52,7 @@ import { ProgressBar } from 'primeng/progressbar';
     CourseoverviewComponent,
     CreatecourseformComponent,
     UploadresourcestocoursComponent,
+    LoginformComponent,
   ],
   imports: [
     CommonModule,
@@ -78,6 +83,8 @@ import { ProgressBar } from 'primeng/progressbar';
     ProgressBar,
     ToastModule,
     CommonModule,
+    InputNumberModule,
+    CloudinaryModule,
   ],
   exports: [
     NavbarComponent,
@@ -90,6 +97,9 @@ import { ProgressBar } from 'primeng/progressbar';
     CourseoverviewComponent,
     CreatecourseformComponent,
     UploadresourcestocoursComponent,
+    LoginformComponent
   ], // Export here
 })
-export class SharedModule {}
+export class SharedModule {
+
+}

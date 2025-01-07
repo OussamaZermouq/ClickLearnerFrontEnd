@@ -8,3 +8,7 @@
 *{
     font-family: 'Poppins';
 }
+
+nav {
+    z-index: 999;
+  }

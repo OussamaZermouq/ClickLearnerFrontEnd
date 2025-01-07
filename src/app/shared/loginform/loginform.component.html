@@ -1,0 +1,76 @@
+<div class="min-h-screen flex flex-col justify-center items-center p-4 bg-gray-50">
+    <!-- Logo and Title -->
+    <div class="mb-8 flex flex-col items-center">
+
+      <h1 class="text-2xl font-bold mt-4">ClickLearner</h1>
+      <p class="text-gray-600">Welcome back to your learning journey</p>
+    </div>
+  
+    <!-- Login Card -->
+    <p-card header="Sign in to your account" subheader="Enter your email and password to access your courses" class="w-full max-w-md">
+      <form (ngSubmit)="onSubmit()" class="space-y-6">
+        <!-- Email Input -->
+        <div class="space-y-2">
+          <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+          <input 
+            pInputText 
+            id="email" 
+            type="email" 
+            placeholder="your@email.com" 
+            class="w-full p-inputtext p-component" 
+            [(ngModel)]="email" 
+            name="email" 
+            required />
+        </div>
+  
+        <!-- Password Input -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+            <a href="#" class="text-sm text-blue-600 hover:text-blue-800">
+              Forgot password?
+            </a>
+          </div>
+          <input 
+            pInputText 
+            id="password" 
+            type="password" 
+            class="w-full p-inputtext p-component" 
+            [(ngModel)]="password" 
+            name="password" 
+            required />
+        </div>
+  
+  
+        <!-- Login Button -->
+        <button pButton type="submit" label="Sign in" class="w-full" [disabled]="!email || !password"></button>
+  
+        <!-- Divider -->
+        <div class="relative my-6">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-200"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-white text-gray-500">
+              Or continue with
+            </span>
+          </div>
+        </div>
+  
+        <!-- Social Logins -->
+        <div class="grid grid-cols-2 gap-4">
+          <button pButton label="Gmail" icon="pi pi-envelope" class="w-full p-button-outlined"></button>
+          <button pButton label="GitHub" icon="pi pi-github" class="w-full p-button-outlined"></button>
+        </div>
+  
+        <!-- Sign Up Link -->
+        <p class="text-center text-sm text-gray-600">
+          Don't have an account? 
+          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">
+            Sign up for free
+          </a>
+        </p>
+      </form>
+    </p-card>
+  </div>
+  

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
+import { ProgressionService } from '../../shared/services/progression.service';
 
 @Component({
   selector: 'app-coursedetails',

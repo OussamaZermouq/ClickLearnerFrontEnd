@@ -1,0 +1,106 @@
+<div>
+  <app-navbar></app-navbar>
+  <div>
+    <div class="flex justify-center">
+      <div
+        class="grid grid-cols-1 gap-x-8 gap-y-16 m-16 pt-16 w-4/5 justify-items-start"
+      >
+        <div class="justify-self-center w-full">
+          <div class="flex flex-col">
+            <div class="grid grid-cols-8">
+              <div class="col-span-4 col-start-2">
+                <div class="flex flex-col gap-4">
+                  <p class="text-5xl font-bold">{{ cours!.titreCours }}</p>
+                  <p>
+                    {{ cours!.descriptionCours }}
+                  </p>
+                  <div class="flex gap-4">
+                    <div class="flex gap-2 items-center">
+                      <i class="pi pi-clock self-center"></i>
+                      <p class="text-lg">
+                        {{ cours!.estimatedDuration }} minutes
+                      </p>
+                    </div>
+
+                    <div class="flex gap-2 items-center">
+                      <i class="pi pi-book self-center"></i>
+                      <p class="text-lg normal-case">{{ cours!.difficulty }}</p>
+                    </div>
+
+                    <div class="flex gap-2 items-center">
+                      <i class="pi pi-user self-center"></i>
+                      <p class="text-lg">0 subscriber(s)</p>
+                    </div>
+                  </div>
+
+                  <p class="text-2xl font-bold">Contenu du cours</p>
+                  <div class="flex flex-col gap-4">
+                    <div *ngFor="let c of cours!.chapitres; let i = index">
+                      <p-card>
+                        <p class="text-xl font-bold">{{ c.titreChapitre }}</p>
+                        <div
+                          [innerHTML]="content[i]"
+                          class="text-wrap break-words whitespace-normal overflow-x-hidden max-w-full"
+                        ></div>
+                      </p-card>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-start-7 relative">
+                <div class="sticky top-32">
+                  <p-card [style]="{ width: '25rem' }">
+                    <!-- Card Header -->
+                    <ng-template #title>
+                      <p class="capitalize text-2xl font-semibold mb-6">Resources</p>
+                    </ng-template>
+              
+                    <div class="flex flex-col gap-6">
+                      <div 
+                        class="flex flex-col gap-4" 
+                        *ngFor="let chap of cours!.chapitres"
+                      >
+                        <div 
+                          *ngFor="let doc of chap!.documents" 
+                          class="p-4 border border-zinc-700 rounded-lg "
+                        >
+                          <p class="text-xl font-medium mb-3">{{ doc!.nomDocument }}</p>
+              
+                          <div *ngIf="doc.urlDocument!.endsWith('.mp4')" class="mt-2">
+                            <video 
+                              class="w-full rounded-md shadow-sm" 
+                              controls 
+                              (canplay)="pauseVideo(videoplayer)" 
+                              #videoPlayer
+                            >
+                              <source 
+                                src="{{ doc.urlDocument }}" 
+                                type="video/mp4"
+                              />
+                              Your browser does not support the video tag.
+                            </video>
+                          </div>
+              
+                          <!-- PDF Download Link -->
+                          <div *ngIf="!doc.urlDocument!.endsWith('.mp4')" class="mt-2">
+                            <a 
+                              href="{{ doc.urlDocument }}" 
+                              class="flex items-center gap-2"
+                            >
+                              <i class="pi pi-file-pdf"></i> <!-- Assuming you're using PrimeNG icons -->
+                              Python pdf file download
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </p-card>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

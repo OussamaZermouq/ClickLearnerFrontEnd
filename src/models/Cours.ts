@@ -9,8 +9,9 @@ export class Cours{
     coursImage?:any;
     titreCours?:string;
     prof?:Professor;
+    profId?:number;
     matiere?:Matiere;
     estimatedDuration?:number;
-    difficulty?:DifficultyEnum;
+    difficulty?:string;
     chapitres?: Chapitre[];
 }

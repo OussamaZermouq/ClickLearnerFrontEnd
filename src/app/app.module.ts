@@ -11,7 +11,6 @@ import Aura from '@primeng/themes/aura';
 import { definePreset } from "@primeng/themes";
 import { provideHttpClient } from '@angular/common/http';
 
-
 //application theme
 
 const applicationPresetTheme = definePreset(Aura, {
@@ -680,9 +679,10 @@ const applicationPresetTheme = definePreset(Aura, {
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
+   
     provideHttpClient(),
     provideAnimationsAsync(),
     providePrimeNG({
